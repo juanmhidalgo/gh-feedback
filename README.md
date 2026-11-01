@@ -14,6 +14,27 @@ gh feedback --version
 
 Upgrade with `gh extension upgrade feedback`. Auth is the one `gh` already has.
 
+### With mise
+
+[mise](https://mise.jdx.dev)'s `github` backend installs the release binary.
+`bin` names it `gh-feedback`; without it, it lands as `linux` or `darwin`:
+
+```bash
+mise use -g 'github:juanmhidalgo/gh-feedback[bin=gh-feedback]'
+gh-feedback --version
+```
+
+That puts `gh-feedback` on your `PATH`, but `gh` only runs extensions it
+installed itself. For `gh feedback` to work too (scripts and agents call it by
+that name), alias it; exit codes pass through:
+
+```bash
+gh alias set --shell feedback 'gh-feedback "$@"'
+```
+
+Use one way or the other: `gh` refuses the alias while the extension is
+installed (`gh extension remove feedback` first).
+
 ## Commands
 
 Every command works on the current repository, or on `-R [HOST/]OWNER/REPO`.
