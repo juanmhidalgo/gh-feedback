@@ -121,4 +121,20 @@ go build -o gh-feedback . && gh extension install .   # use the checkout as the 
 Tests run against a fake GitHub (`internal/feedback/fake_test.go`) that pages
 REST through `Link` headers and GraphQL through cursors.
 
-Release: push a `v*` tag; the release workflow builds every platform's binary.
+Release: push a `v*` tag; the release workflow builds every platform's binary
+and attests its provenance (`gh attestation verify <binary> -R juanmhidalgo/gh-feedback`).
+
+## Disclaimer
+
+This is a personal project, not affiliated with or endorsed by GitHub. It is
+provided as is, without warranty of any kind (see [LICENSE](LICENSE)).
+
+`resolve`, `dismiss` and `react` act on GitHub as you, with the account `gh` is
+logged in with: they post replies, add reactions and resolve threads, visible
+to everyone on the PR. When a coding agent calls them, the agent decides what
+gets posted; review its output, or keep those commands behind a permission
+prompt. Reports and fixes are welcome, but there is no support commitment.
+
+## License
+
+[MIT](LICENSE)
